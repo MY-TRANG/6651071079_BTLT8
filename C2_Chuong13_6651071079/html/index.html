@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="vi" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sweet Bakery - Tiệm Bánh Ngọt Hữu Cơ</title>
+    <!-- Nhúng Tailwind Play CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Nhúng file CSS bổ sung -->
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body class="bg-stone-50 text-stone-800 antialiased">
+
+    <!-- HEADER & NAVIGATION -->
+    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md shadow-sm">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <!-- Logo chữ bên trái -->
+            <a href="#" class="text-2xl font-bold text-amber-700 tracking-tight">🍰 SweetBakery</a>
+
+            <!-- Menu ngang bên phải (ẩn trên di động, hiện từ màn hình md trở lên) -->
+            <nav class="hidden md:flex items-center space-x-8 font-medium">
+                <a href="#hero" class="hover:text-amber-600 transition-colors">Trang chủ</a>
+                <a href="#menu" class="hover:text-amber-600 transition-colors">Menu bánh</a>
+                <a href="#story" class="hover:text-amber-600 transition-colors">Câu chuyện</a>
+                <a href="#booking" class="hover:text-amber-600 transition-colors">Đặt bánh</a>
+            </nav>
+
+            <!-- Icon hamburger chỉ hiện trên di động -->
+            <button id="mobile-menu-button" class="md:hidden text-stone-700 focus:outline-none">
+                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16">
+                    </path>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Menu di động ẩn/hiện bằng JS -->
+        <div id="mobile-menu"
+            class="hidden flex-col md:hidden bg-white border-t border-stone-100 px-6 py-4 space-y-3 font-medium">
+            <a href="#hero" class="block hover:text-amber-600">Trang chủ</a>
+            <a href="#menu" class="block hover:text-amber-600">Menu bánh</a>
+            <a href="#story" class="block hover:text-amber-600">Câu chuyện</a>
+            <a href="#booking" class="block hover:text-amber-600">Đặt bánh</a>
+        </div>
+    </header>
+
+    <main>
+        <!-- SECTION HERO -->
+        <section id="hero" class="max-w-7xl mx-auto px-6 py-16 md:py-24 flex flex-col md:flex-row items-center gap-12">
+            <!-- Bên trái: Tiêu đề, mô tả, nút CTA -->
+            <div class="flex-1 space-y-6 text-center md:text-left">
+                <h1 class="text-4xl md:text-6xl font-bold tracking-tight text-stone-900 leading-tight">
+                    Hương vị ngọt ngào <span class="text-amber-600">từ lò nướng mỗi ngày</span>
+                </h1>
+                <p class="text-lg text-stone-600">
+                    Khám phá thế giới bánh ngọt thủ công được làm từ nguyên liệu tươi sạch thượng hạng, mang lại trải
+                    nghiệm vị giác tuyệt vời nhất cho bạn và gia đình.
+                </p>
+                <div>
+                    <a href="#menu"
+                        class="inline-block bg-amber-600 hover:bg-amber-700 text-white font-medium px-6 py-3 rounded-full transition shadow-lg hover:shadow-xl">
+                        Khám phá Menu ngay
+                    </a>
+                </div>
+            </div>
+            <!-- Bên phải: Ảnh bánh ngọt truy xuất từ thư mục images nội bộ -->
+            <div class="flex-1">
+                <img src="../images/banh1.jpg" alt="Bánh ngọt hero"
+                    class="rounded-3xl shadow-2xl object-cover w-full h-[350px] md:h-[450px]">
+            </div>
+        </section>
+
+        <!-- Ghi chú so sánh (Comment HTML nằm ngay trước khu vực Menu bánh) -->
+        <!-- 
+          So sánh triết lý thiết kế: Ở bài này đang tự phối utility-class của Tailwind để tạo card, 
+          khác với Card component dựng sẵn btn/card của Bootstrap ở Bài 1 — nhằm chứng tỏ sinh viên hiểu rõ triết lý "utility-first" khác "component-based" như thế nào.
+        -->
+
+        <!-- SECTION "Menu bánh" (Tối thiểu 6 loại bánh, tự phối utility class) -->
+        <section id="menu" class="bg-amber-50/50 py-20 px-6">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center max-w-2xl mx-auto mb-16 space-y-3">
+                    <h2 class="text-3xl md:text-4xl font-bold text-stone-900">Menu Bánh Ngọt Nổi Bật</h2>
+                    <p class="text-stone-600">Mỗi chiếc bánh là một tác phẩm nghệ thuật thủ công được chăm chút tỉ mỉ.
+                    </p>
+                </div>
+
+                <!-- Lưới hiển thị các sản phẩm (Articles) -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Loại bánh 1 -->
+                    <article
+                        class="rounded-2xl shadow-lg overflow-hidden bg-white hover:shadow-xl transition flex flex-col">
+                        <img src="../images/banh croissant.jpg" alt="Bánh Croissant" class="w-full h-56 object-cover">
+                        <div class="p-6 flex flex-col flex-1 justify-between">
+                            <div>
+                                <h3 class="text-xl font-bold text-stone-900 mb-2">Croissant Bơ Pháp</h3>
+                                <p class="text-stone-600 text-sm mb-4">Lớp vỏ ngàn lớp giòn rụm thơm mùi bơ nguyên chất
+                                    nhập khẩu từ Pháp.</p>
+                            </div>
+                            <div class="flex justify-between items-center mt-4">
+                                <span class="text-amber-600 font-bold text-lg">35.000đ</span>
+                                <a href="#booking"
+                                    class="bg-amber-100 text-amber-800 px-4 py-2 rounded-lg text-sm font-medium hover:bg-amber-200 transition">Đặt
+                                    mua</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Loại bánh 2 -->
+                    <article
+                        class="rounded-2xl shadow-lg overflow-hidden bg-white hover:shadow-xl transition flex flex-col">
+                        <img src="../images/banh tiramisu.webp" alt="Bánh Tiramisu" class="w-full h-56 object-cover">
+                        <div class="p-6 flex flex-col flex-1 justify-between">
+                            <div>
+                                <h3 class="text-xl font-bold text-stone-900 mb-2">Tiramisu Ý Truyền Thống</h3>
+                                <p class="text-stone-600 text-sm mb-4">Hương vị cà phê đậm đà hòa quyện cùng lớp kem
+                                    Mascarpone béo mịn màng.</p>
+                            </div>
+                            <div class="flex justify-between items-center mt-4">
+                                <span class="text-amber-600 font-bold text-lg">55.000đ</span>
+                                <a href="#booking"
+                                    class="bg-amber-100 text-amber-800 px-4 py-2 rounded-lg text-sm font-medium hover:bg-amber-200 transition">Đặt
+                                    mua</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Loại bánh 3 -->
+                    <article
+                        class="rounded-2xl shadow-lg overflow-hidden bg-white hover:shadow-xl transition flex flex-col">
+                        <img src="../images/banh tart trung.webp" alt="Bánh Tart Trứng" class="w-full h-56 object-cover">
+                        <div class="p-6 flex flex-col flex-1 justify-between">
+                            <div>
+                                <h3 class="text-xl font-bold text-stone-900 mb-2">Tart Trứng Bồ Đào Nha</h3>
+                                <p class="text-stone-600 text-sm mb-4">Nhân kem trứng thơm ngậy tan chảy bên trong lớp
+                                    vỏ tart vàng giòn rụm.</p>
+                            </div>
+                            <div class="flex justify-between items-center mt-4">
+                                <span class="text-amber-600 font-bold text-lg">25.000đ</span>
+                                <a href="#booking"
+                                    class="bg-amber-100 text-amber-800 px-4 py-2 rounded-lg text-sm font-medium hover:bg-amber-200 transition">Đặt
+                                    mua</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Loại bánh 4 -->
+                    <article
+                        class="rounded-2xl shadow-lg overflow-hidden bg-white hover:shadow-xl transition flex flex-col">
+                        <img src="../images/Banh mousse dau.jpg" alt="Bánh Mousse Dâu" class="w-full h-56 object-cover">
+                        <div class="p-6 flex flex-col flex-1 justify-between">
+                            <div>
+                                <h3 class="text-xl font-bold text-stone-900 mb-2">Mousse Dâu Tây Tươi</h3>
+                                <p class="text-stone-600 text-sm mb-4">Vị chua ngọt thanh mát từ dâu tây tươi kết hợp
+                                    lớp bánh bông lan mềm xốp.</p>
+                            </div>
+                            <div class="flex justify-between items-center mt-4">
+                                <span class="text-amber-600 font-bold text-lg">45.000đ</span>
+                                <a href="#booking"
+                                    class="bg-amber-100 text-amber-800 px-4 py-2 rounded-lg text-sm font-medium hover:bg-amber-200 transition">Đặt
+                                    mua</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Loại bánh 5 -->
+                    <article
+                        class="rounded-2xl shadow-lg overflow-hidden bg-white hover:shadow-xl transition flex flex-col">
+                        <img src="../images/banh cupcake.webp" alt="Bánh Cupcake" class="w-full h-56 object-cover">
+                        <div class="p-6 flex flex-col flex-1 justify-between">
+                            <div>
+                                <h3 class="text-xl font-bold text-stone-900 mb-2">Cupcake Socola Hạnh Nhân
