@@ -21,7 +21,26 @@
 
 
     <script src="js/jquery-4.0.0.min.js"></script>
+    
+    <script>
+        $(document).ready(function () {
+            $('.password-show').on('click', function () {
+                var passwordInput = $('.input-control');
 
+                if (passwordInput.attr('type') === 'password') {
+                    
+                    passwordInput.attr('type', 'text');
+                    
+                    $(this).removeClass('fa-eye').addClass('fa-eye-slash');
+                } else {
+                   
+                    passwordInput.attr('type', 'password');
+                    
+                    $(this).removeClass('fa-eye-slash').addClass('fa-eye');
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>
