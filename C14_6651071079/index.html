@@ -7,6 +7,8 @@
     <meta charset="UTF-8">
 
     <link rel="stylesheet" href="css/style.css">
+
+    
 </head>
 
 <body>
@@ -30,6 +32,26 @@
     </div>
 
     <script src="js/jquery-4.0.0.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#myonoffswitch').on('change', function () {
+                var imgElement = $('#imageToggle');
+                if ($(this).is(':checked')) {
+                    // Khi bật (On) -> Chuyển sang ảnh on.img
+                    imgElement.attr('src', 'images/on.img');
+                } else {
+                    // Khi tắt (Off) -> Chuyển về ảnh off.img
+                    imgElement.attr('src', 'images/off.img');
+                }
+            });
+        });
+    </script>
+    
+    </body>
+    
+    </html>
+
 
 </body>
 
