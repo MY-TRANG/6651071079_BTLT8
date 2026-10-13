@@ -5,21 +5,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sweet Bakery - Tiệm Bánh Ngọt Hữu Cơ</title>
-    <!-- Nhúng Tailwind Play CDN -->
+    <!-- Nhúng Tailwind -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Nhúng file CSS bổ sung -->
+    <!-- nhúng file CSS -->
     <link rel="stylesheet" href="../css/style.css">
 </head>
 
 <body class="bg-stone-50 text-stone-800 antialiased">
 
-    <!-- HEADER & NAVIGATION -->
     <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md shadow-sm">
         <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-            <!-- Logo chữ bên trái -->
+            <!-- logo chữ bên trái -->
             <a href="#" class="text-2xl font-bold text-amber-700 tracking-tight">🍰 SweetBakery</a>
 
-            <!-- Menu ngang bên phải (ẩn trên di động, hiện từ màn hình md trở lên) -->
+            
             <nav class="hidden md:flex items-center space-x-8 font-medium">
                 <a href="#hero" class="hover:text-amber-600 transition-colors">Trang chủ</a>
                 <a href="#menu" class="hover:text-amber-600 transition-colors">Menu bánh</a>
@@ -27,7 +26,7 @@
                 <a href="#booking" class="hover:text-amber-600 transition-colors">Đặt bánh</a>
             </nav>
 
-            <!-- Icon hamburger chỉ hiện trên di động -->
+        
             <button id="mobile-menu-button" class="md:hidden text-stone-700 focus:outline-none">
                 <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16">
@@ -36,7 +35,7 @@
             </button>
         </div>
 
-        <!-- Menu di động ẩn/hiện bằng JS -->
+    
         <div id="mobile-menu"
             class="hidden flex-col md:hidden bg-white border-t border-stone-100 px-6 py-4 space-y-3 font-medium">
             <a href="#hero" class="block hover:text-amber-600">Trang chủ</a>
@@ -47,7 +46,7 @@
     </header>
 
     <main>
-        <!-- SECTION HERO -->
+    
         <section id="hero" class="max-w-7xl mx-auto px-6 py-16 md:py-24 flex flex-col md:flex-row items-center gap-12">
             <!-- Bên trái: Tiêu đề, mô tả, nút CTA -->
             <div class="flex-1 space-y-6 text-center md:text-left">
@@ -65,20 +64,15 @@
                     </a>
                 </div>
             </div>
-            <!-- Bên phải: Ảnh bánh ngọt truy xuất từ thư mục images nội bộ -->
+        
             <div class="flex-1">
                 <img src="../images/banh ngot.jpeg" alt="Bánh ngọt hero"
                     class="rounded-3xl shadow-2xl object-cover w-full h-[350px] md:h-[450px]">
             </div>
         </section>
 
-        <!-- Ghi chú so sánh (Comment HTML nằm ngay trước khu vực Menu bánh) -->
-        <!-- 
-          So sánh triết lý thiết kế: Ở bài này đang tự phối utility-class của Tailwind để tạo card, 
-          khác với Card component dựng sẵn btn/card của Bootstrap ở Bài 1 — nhằm chứng tỏ sinh viên hiểu rõ triết lý "utility-first" khác "component-based" như thế nào.
-        -->
-
-        <!-- SECTION "Menu bánh" (Tối thiểu 6 loại bánh, tự phối utility class) -->
+        
+        <!-- menu bánh -->
         <section id="menu" class="bg-amber-50/50 py-20 px-6">
             <div class="max-w-7xl mx-auto">
                 <div class="text-center max-w-2xl mx-auto mb-16 space-y-3">
@@ -87,7 +81,7 @@
                     </p>
                 </div>
 
-                <!-- Lưới hiển thị các sản phẩm (Articles) -->
+                <!-- hiển thị các sản phẩm -->
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     <!-- Loại bánh 1 -->
                     <article
@@ -204,7 +198,7 @@
                                 </div>
                                 </section>
                                 
-                                <!-- SECTION "Câu chuyện thương hiệu" -->
+                                <!-- câu chuyện thương hiệu -->
                                 <section id="story" class="max-w-5xl mx-auto px-6 py-20">
                                     <div class="bg-white rounded-3xl shadow-xl overflow-hidden flex flex-col md:flex-row items-center">
                                         <div class="w-full md:w-1/2">
@@ -222,11 +216,18 @@
                                                 Tất cả nguyên liệu đều được tuyển chọn kỹ lưỡng, không chất bảo quản, đảm bảo độ tươi ngon nguyên bản
                                                 trong từng mẻ bánh ra lò.
                                             </p>
+                                            <p class="text-stone-600 leading-relaxed">
+                                                Tôi đã trưởng thành từ trong đau khổ, tôi đứng lên từ đống tro tàn tôi đứng lên từ một đống tro tàn nguội lạnh như một
+                                                cái bông hoa nở giữa sa mạc và tôi có ngày hôm nay á là do tôi may mắn cộng thêm một sự kiêu hãnh kiên định không có dễ
+                                                gì lung lay tôi đâu, thấy tôi cười đừng tưởng tôi vui, mà thấy tôi khóc đừng nghĩ tôi buồn cái đầu của tôi tỉnh như tỉnh
+                                                quỷ, không ai dẫn dắt tôi được hết, tôi nghe bao giờ cũng bằng con tim và lý trí, tôi như một người phán quan tui chiếu
+                                                chỗ nào là chỗ đó banh xác.
+                                            </p>
                                         </div>
                                     </div>
                                 </section>
                                 
-                                <!-- SECTION / ASIDE & FORM (ĐẶT BÁNH THEO YÊU CẦU & FORM TƯƠNG TÁC) -->
+                                <!-- form đặt bánh -->
                                 <section id="booking" class="max-w-7xl mx-auto px-6 py-12 mb-20">
                                     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
                                 
@@ -270,7 +271,7 @@
                                             </form>
                                         </div>
                                 
-                                        <!-- ASIDE "Đặt bánh theo yêu cầu" chiếm lg:col-span-1 -->
+                                        <!-- đặt bánh theo yêu cầu -->
                                         <aside class="bg-amber-50 border border-amber-200 rounded-xl p-6 space-y-4 self-start">
                                             <h3 class="text-xl font-bold text-amber-900">Thông Tin Đặt Bánh Theo Yêu Cầu</h3>
                                             <p class="text-sm text-stone-700">
@@ -284,7 +285,7 @@
                                             <div class="pt-2">
                                                 <span class="block text-xs font-semibold text-amber-800 uppercase tracking-wider">Hotline hỗ trợ
                                                     nhanh:</span>
-                                                <a href="tel:0123456789" class="text-lg font-bold text-amber-700">0123 456 789</a>
+                                                <a href="tel:0356093733" class="text-lg font-bold text-amber-700">0356 093 733</a>
                                             </div>
                                         </aside>
                                 
@@ -307,9 +308,9 @@
                                         </div>
                                         <div>
                                             <h4 class="text-lg font-semibold text-white mb-4">Thông Tin Liên Hệ</h4>
-                                            <p class="text-sm text-stone-400">📍 123 Đường Bánh Ngọt, Quận 1, TP.HCM</p>
-                                            <p class="text-sm text-stone-400">📞 0123 456 789</p>
-                                            <p class="text-sm text-stone-400">✉️ contact@sweetbakery.vn</p>
+                                            <p class="text-sm text-stone-400">📍 Số 450 - 451 đường Lê Văn Việt, Phường Tăng Nhơn Phú A, Thành phố Thủ Đức, TP. Hồ Chí Minh (trước đây thuộc Quận 9).</p>
+                                            <p class="text-sm text-stone-400">📞 0356 093 733</p>
+                                            <p class="text-sm text-stone-400">✉️ 6651071079@st.utc2.edu.vn</p>
                                         </div>
                                         <div>
                                             <h4 class="text-lg font-semibold text-white mb-4">Mạng Xã Hội</h4>
