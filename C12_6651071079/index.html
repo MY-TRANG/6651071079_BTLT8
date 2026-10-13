@@ -44,7 +44,59 @@
     </div>
 
     <script src="js/jquery-4.0.0.min.js"></script>
+    
+    <form>
+        
+        <div>
+            <label>Bạn có Passport không?</label><br>
+            <label><input type="radio" name="hasPassport" value="yes"> Yes</label>
+            <label><input type="radio" name="hasPassport" value="no" checked> No</label>
+        </div>
+        
+        <div id="passportField" class="hidden-field">
+            <label for="passportInput">Nhập thông tin Passport:</label>
+            <input type="text" id="passportInput" name="passportInfo" placeholder="Số passport...">
+        </div>
+    
+        <br>
+    
+       
+        <div>
+            <label>Bạn có Credit Card không?</label><br>
+            <label><input type="radio" name="hasCreditCard" value="yes"> Yes</label>
+            <label><input type="radio" name="hasCreditCard" value="no" checked> No</label>
+        </div>
+        
+        <div id="creditCardField" class="hidden-field">
+            <label for="creditCardInput">Nhập thông tin Credit Card:</label>
+            <input type="text" id="creditCardInput" name="creditCardInfo" placeholder="Số thẻ tín dụng...">
+        </div>
+    </form>
+    
+   
+    <script>
+        $(document).ready(function () {
+            // Xử lý cho phần Passport
+            $('input[name="hasPassport"]').on('change', function () {
+                if ($(this).val() === 'yes' && $(this).is(':checked')) {
+                    $('#passportField').slideDown(); 
+                } else {
+                    $('#passportField').slideUp();   
+                    $('#passportInput').val('');     
+                }
+            });
 
+            
+            $('input[name="hasCreditCard"]').on('change', function () {
+                if ($(this).val() === 'yes' && $(this).is(':checked')) {
+                    $('#creditCardField').slideDown(); 
+                } else {
+                    $('#creditCardField').slideUp();   
+                    $('#creditCardInput').val('');     
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>
