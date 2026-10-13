@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="vi" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tech Gear - Shop Phụ Kiện Điện Thoại Mini</title>
+    <!-- Nhúng Tailwind CSS qua CDN để hỗ trợ trình bày giao diện -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Nhúng file CSS bổ sung -->
+    <link rel="stylesheet" href="../css/style.css">
+    <!-- Nhúng Vue.js 3 CDN (BẮT BUỘC nhúng TRƯỚC app.js) -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+<body class="bg-stone-50 text-stone-800 antialiased">
+
+    <!-- Bọc toàn bộ ứng dụng trong div#app để Vue quản lý -->
+    <div id="app">
+
+        <!-- HEADER & NAVIGATION TĨNH + GIỎ HÀNG ĐỘNG -->
+        <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md shadow-sm border-b border-stone-100">
+            <div class="max-w-7xl mx-auto px-6 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
+                <!-- Logo shop -->
+                <a href="#" class="flex items-center gap-2 font-bold text-lg tracking-tight text-stone-900">
+                    <span class="bg-blue-600 text-white px-2 py-1 rounded text-sm">⚡</span>
+                    TECH GEAR - ACCESSORIES
+                </a>
+
+                <!-- Menu điều hướng -->
+                <nav
+                    class="hidden lg:flex items-center space-x-6 text-sm font-semibold text-stone-600 uppercase tracking-wider">
+                    <a href="#" class="hover:text-blue-600 transition">Trang chủ</a>
+                    <a href="#" class="hover:text-blue-600 transition">Sản phẩm</a>
+                    <a href="#" class="hover:text-blue-600 transition">Khuyến mãi</a>
+                    <a href="#" class="hover:text-blue-600 transition">Liên hệ</a>
+                </nav>
+
+                <!-- Icon giỏ hàng hiển thị SỐ LƯỢNG động bằng {{ cartCount }} và Ô tìm kiếm v-model -->
+                <div class="flex items-center gap-4 w-full md:w-auto justify-end">
+                    <!-- Ô tìm kiếm liên kết 2 chiều với biến tuKhoa -->
+                    <div class="relative">
+                        <input type="text" v-model="tuKhoa" placeholder="Tìm kiếm phụ kiện..."
+                            class="px-4 py-2 pl-9 text-sm rounded-full border border-stone-300 focus:outline-none focus:ring-2 focus:ring-blue-500 w-48 md:w-60 transition">
+                        <svg class="w-4 h-4 text-stone-400 absolute left-3 top-3" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        </svg>
+                    </div>
+
+                    <!-- Biểu tượng giỏ hàng -->
+                    <div
+                        class="relative flex items-center bg-blue-50 text-blue-600 px-3 py-2 rounded-full cursor-pointer font-medium text-sm">
+                        🛒 <span class="ml-1 font-bold">{{ cartCount }}</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main class="max-w-7xl mx-auto px-6 py-10">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+                <!-- DANH SÁCH SẢN PHẨM (Chiếm 2 cột trên màn hình lớn) -->
+                <section class="lg:col-span-2 space-y-6">
+                    <h2 class="text-2xl font-bold text-stone-900">Danh Sách Phụ Kiện</h2>
+
+                    <!-- Thông báo nếu không tìm thấy sản phẩm -->
+                    <div v-if="danhSachLoc.length === 0"
+                        class="bg-white p-8 rounded-2xl shadow-sm text-center text-stone-500">
+                        Không tìm thấy sản phẩm phù hợp với từ khóa "<span class="font-semibold text-stone-800">{{
+                            tuKhoa }}</span>".
+                    </div>
+
+                    <!-- Dùng v-for lặp qua danhSachLoc để render danh sách sản phẩm thay vì viết tay -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                        <article v-for="sanPham in danhSachLoc" :key="sanPham.id"
+                            class="bg-white rounded-2xl shadow-md hover:shadow-xl transition overflow-hidden flex flex-col justify-between border border-stone-100">
+                            <div>
+                                <!-- Truy xuất ảnh nội bộ từ thư mục images -->
+                                <img :src="sanPham.image" :alt="sanPham.name" class="w-full h-48 object-cover">
+                                <div class="p-5 space-y-2">
+                                    <h3 class="font-bold text-stone-900 text-base line-clamp-1">{{ sanPham.name }}</h3>
+                                    <p class="text-xs text-stone-500 line-clamp-2">{{ sanPham.desc }}</p>
+                                </div>
+                            </div>
+                            <div class="p-5 pt-0 flex items-center justify-between mt-auto">
+                                <span class="font-bold text-blue-600 text-sm">{{ formatVND(sanPham.price) }}</span>
+                                <!-- Nút Thêm vào giỏ gọi method themVaoGio bằng @click -->
+                                <button @click="themVaoGio(sanPham)"
+                                    class="bg-blue-600 hover:bg-blue-700 text-white p-2.5 rounded-xl transition shadow-sm hover:shadow"
+                                    title="Thêm vào giỏ hàng">
+                                    🛒
+                                </button>
+                            </div>
+                        </article>
+                    </div>
+                </section>
+
+                <!-- ASIDE: GIỎ HÀNG CỦA BẠN (Chiếm 1 cột) -->
+                <aside class="bg-white rounded-2xl shadow-xl p-6 border border-stone-100 h-fit sticky top-24 space-y-6">
+                    <h2 class="text-xl font-bold text-stone-900 border-b border-stone-100 pb-4">YOUR CART <span
+                            class="text-xs font-normal text-stone-500 block">Giỏ hàng của bạn</span></h2>
+
+                    <!-- Dùng v-if/v-show hiển thị thông báo giỏ hàng trống nếu cart.length === 0 -->
+                    <div v-if="cart.length === 0" class="text-center py-8 text-stone-400 text-sm">
+                        Giỏ hàng trống
+                    </div>
+
+                    <!-- Danh sách sản phẩm trong giỏ hàng -->
+                    <div v-else class="space-y-4 max-h-72 overflow-y-auto pr-1">
+                        <div v-for="(item, index) in cart" :key="item.id"
+                            class="flex items-center justify-between gap-3 border-b border-stone-50 pb-3">
+                            <img :src="item.image" :alt="item.name" class="w-12 h-12 object-cover rounded-lg border">
+                            <div class="flex-1 min-w-0">
+                                <h4 class="font-semibold text-xs text-stone-900 truncate">{{ item.name }}</h4>
+                                <p class="text-xs text-stone-500">{{ formatVND(item.price) }} x {{ item.quantity }}</p>
+                            </div>
+                            <!-- Nút xoá sản phẩm khỏi giỏ hàng -->
+                            <button @click="xoaKhoiGio(index)"
+                                class="text-red-500 hover:text-red-700 font-bold px-2 text-sm" title="Xoá">
+                                ✕
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Hiển thị tổng tiền và nút thanh toán -->
+                    <div class="border-t border-stone-100 pt-4 space-y-4">
+                        <div class="flex justify-between items-center font-bold text-stone-900">
+                            <span>TOTAL</span>
+                            <span class="text-blue-600">{{ formatVND(tongTien) }}</span>
+                        </div>
+                        <button
+                            class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-xl transition shadow-md text-sm uppercase tracking-wider">
+                            Checkout (Thanh toán)
+                        </button>
+                    </div>
+                </aside>
+
+            </div>
+
+            <!-- SECTION "Khuyến mãi hôm nay" trình bày tĩnh -->
+            <section
+                class="mt-16 bg-gradient-to-r from-blue-600 to-indigo-700 rounded-3xl p-8 md:p-12 text-white text-center shadow-2xl">
+                <h2 class="text-2xl md:text-3xl font-extrabold tracking-tight mb-2">GET 20% OFF ALL CASES! LIMITED TIME
+                    OFFER</h2>
+                <p class="text-blue-100 text-sm md:text-base">Áp dụng cho toàn bộ danh mục ốp lưng điện thoại cao cấp
+                    trong tuần lễ tri ân khách hàng.</p>
+            </section>
+        </main>
+
+        <!-- FOOTER -->
+        <footer class="bg-stone-900 text-stone-300 mt-20">
+            <div class="max-w-7xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-4 gap-10 text-sm">
+                <div class="space-y-3">
+                    <h3 class="font-bold text-white text-base">About Us</h3>
+                    <p class="text-stone-400">Cung cấp phụ kiện điện thoại chính hãng, chất lượng hàng đầu cho giới trẻ.
+                    </p>
+                </div>
+                <div class="space-y-3">
+                    <h3 class="font-bold text-white text-base">Support</h3>
+                    <p class="text-stone-400">Accessibility<br>Shipping<br>Contact Us</p>
+                </div>
+                <div class="space-y-3">
+                    <h3 class="font-bold text-white text-base">FAQ</h3>
+                    <p class="text-stone-400">Privacy Policy</p>
+                </div>
+                <div class="space-y-3">
+                    <h3 class="font-bold text-white text-base">Social Media</h3>
+                    <p class="text-stone-400">Kết nối với chúng tôi qua Facebook, Instagram, Youtube.</p>
+                </div>
+            </div>
+            <div class="border-t border-stone-800 py-6 text-center text-xs text-stone-500">
+                &copy; Copyright 2026, Lịch sử Rights Reserved.
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- Nhúng file app.js chứa logic Vue.js sau thẻ div#app -->
+    <script src="../js/app.js"></script>
+</body>
+
+</html>
