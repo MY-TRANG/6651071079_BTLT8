@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <script src="https://code.jquery.com/jquery-4.0.0.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Home</title>
     <meta charset="UTF-8">
@@ -22,6 +23,28 @@
         </div>
     </div>
 
+    <input type="file" id="fileInput">
+    
+    <div>
+        <p>Tên file: <span id="fileName"></span></p>
+        <p>Phần mở rộng: <span id="fileExtension"></span></p>
+    </div>
+    
+    <script>
+        $(document).ready(function () {
+            $('#fileInput').on('change', function (e) {
+                var file = e.target.files[0];
+                if (file) {
+                    var fileName = file.name;
+                    $('#fileName').text(fileName);
+
+                    // Lấy phần mở rộng của file
+                    var fileExt = fileName.split('.').pop();
+                    $('#fileExtension').text(fileExt);
+                }
+            });
+        });
+    </script>
 
 </body>
 
